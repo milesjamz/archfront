@@ -29,6 +29,7 @@ const showUserData = () => {
         <div>
             <strong>Hello, {thisGuy.username}!</strong><br/><br/>
             You have {thisGuy.days.length} {thisGuy.days.length === 1 ? 'day' : 'days'} recorded.<br/><br/>
+            <div className='dataContainer'>
             algos: {answers['algo']} total, { (Math.round(answers['algo'] / thisGuy.days.length * 2) / 2 )} per day average<br/>
             job applications: {answers['apps']} total, { Math.round(answers['apps'] / thisGuy.days.length * 2) / 2} per day average <br/>
             blogs: {answers['blog']} total, { Math.round(answers['blog'] / thisGuy.days.length * 2 )/ 2} per day average <br/>
@@ -49,6 +50,7 @@ const showUserData = () => {
             front raises: {answers['front_raise']} total, {Math.round(answers['front_raise'] / thisGuy.days.length * 2 )/ 2} per day average<br/>
             overhead press: {answers['ohp']} total, {Math.round(answers['ohp'] / thisGuy.days.length * 2 )/ 2} per day average<br/>
             daily mood: {answers['mood']} total, {Math.round(answers['mood'] / thisGuy.days.length * 2 )/ 2} average <br/>
+            </div>
         </div>
         )
 }
