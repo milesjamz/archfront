@@ -33,7 +33,7 @@ render() {
 const today = new Date()
 
 const littleGuy = (formType) => {
-return <input type='number' style={{ width: "25px" }} value={this.state.formType} onChange={this.handleOnChange}/>
+return <input type='number' style={{ width: "45px" }} value={this.state.formType} onChange={this.handleOnChange}/>
 }
   return (
     <div className="selector">
@@ -58,7 +58,8 @@ curls:{littleGuy('curls')}<br/>
 burpees:{littleGuy('burpees')}<br/>
 push-ups:{littleGuy('pushUps')}<br/>
 chin-ups:{littleGuy('chinUps')}<br/>
-
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<input type="submit" value="Submit this day's damn activity"/>
 </form>
 
 </div>
