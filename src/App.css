@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color:linen;
 }
 
 .Navbar {
@@ -8,5 +9,7 @@
 }
 
 .selector {
-  background-color:linen;
+height: 100vh;  
+text-align:right;
+padding-right:700px;
 }

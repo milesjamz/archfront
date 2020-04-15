@@ -58,7 +58,7 @@ curls:{littleGuy('curls')}<br/>
 burpees:{littleGuy('burpees')}<br/>
 push-ups:{littleGuy('pushUps')}<br/>
 chin-ups:{littleGuy('chinUps')}<br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/>
 <input type="submit" value="Submit this day's damn activity"/>
 </form>
 
