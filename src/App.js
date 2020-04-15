@@ -7,7 +7,6 @@ function App() {
   return (
     <div className="App">
     <NavBar />
-hello, this is my archival project home page
     <Selector />
 </div>
 )

@@ -3,7 +3,8 @@ import React from 'react';
 class Selector extends React.Component {
 
 state = {
-	dropDown: ''
+	dropDown: '',
+	fuck: ''
 }
 
 // handleOnChange = e => {
@@ -31,25 +32,32 @@ render() {
 
 const today = new Date()
 
+const littleGuy = (formType) => {
+return <input type='number' style={{ width: "25px" }} value={this.state.formType} onChange={this.handleOnChange}/>
+}
   return (
     <div className="selector">
 Hello, USERNAME - today is {today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()}.<br/>
-What did you do today?
+What did you do today?<br/><br/>
 <form>
-algorithms:<br/>
-job applications:<br/>
-blogs:<br/>
-songs:<br/>
-journal pages:<br/>
-personal letters:<br/>
-calls to family:<br/>
-front plank minutes:<br/>
-side plank minutes:<br/>
-rear plank minutes:<br/>
-curls:<br/>
-burpees:<br/>
-push-ups:<br/>
-chin-ups:<br/>
+--- job search ---<br/><br/>
+algorithms completed:{littleGuy('algos')}<br/>
+job applications:{littleGuy('jobs')}<br/>
+blogs:{littleGuy('blogs')}<br/><br/>
+--- musical ---<br/><br/>
+songs recorded:{littleGuy('songWrote')}<br/>
+songs written:{littleGuy('songRecorded')}<br/>
+journal pages:{littleGuy('journalPages')}<br/>
+personal letters:{littleGuy('letters')}<br/>
+calls to family:{littleGuy('famCalls')}<br/><br/>
+--- physical --- <br/><br/>
+front plank minutes:{littleGuy('frontPlank')}<br/>
+side plank minutes:{littleGuy('sidePlank')}<br/>
+rear plank minutes:{littleGuy('rearPlank')}<br/>
+curls:{littleGuy('curls')}<br/>
+burpees:{littleGuy('burpees')}<br/>
+push-ups:{littleGuy('pushUps')}<br/>
+chin-ups:{littleGuy('chinUps')}<br/>
 
 </form>
 
