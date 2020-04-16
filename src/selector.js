@@ -20,7 +20,10 @@ state = {
 	chinUps:'',
 	lateral:'',
 	front:'',
-	ohp:''
+	ohp:'',
+	date:'',
+	color:'',
+	summary:''
 }
 
 
@@ -34,6 +37,11 @@ onSubmit = (e) => {
 	alert(this.state.ohp)
 }
 
+componentDidMount() {
+	const today = new Date()
+	this.setState({ date: (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear() })
+}
+
 render() {
 
 const today = new Date()
@@ -43,7 +51,7 @@ return <input name={formType} type='number' min="0" style={{ width: "45px" }} va
 }
   return (
     <div className="selector">
-Hello, USERNAME - today is {today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()}.<br/>
+Hello, USERNAME - today is {(today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear()}.<br/>
 What did you do today?<br/><br/>
 <form onSubmit={this.onSubmit} >
 --- job search ---<br/><br/>
@@ -78,6 +86,9 @@ lateral raises:{littleGuy('lateral')}<br/>
 front raises:{littleGuy('front')}<br/>
 overhead press:{littleGuy('ohp')}<br/>	
 </div>
+--- personal --- <br/>
+today's color:<input type='text' name="color" value={this.state.formType} onChange={this.handleOnChange}/><br/>
+summary:<input type="text" style={{ height: "200px", width: "400px" }}  />
 <br/><br/><br/><br/><br/>
 <input type="submit" value="Submit this day's damn activity"/>
 </form>
