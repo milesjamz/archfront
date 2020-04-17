@@ -85,8 +85,8 @@ chin-ups:{littleGuy('chinUps')}<br/>
 lateral raises:{littleGuy('lateral')}<br/>
 front raises:{littleGuy('front')}<br/>
 overhead press:{littleGuy('ohp')}<br/>	
-</div>
---- personal --- <br/>
+</div><br/>
+--- personal --- <br/><br/>
 today's color:<input type='text' name="color" value={this.state.formType} onChange={this.handleOnChange}/><br/>
 summary:<input type="text" style={{ height: "200px", width: "400px" }}  />
 <br/><br/><br/><br/><br/>
