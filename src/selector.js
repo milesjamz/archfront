@@ -3,27 +3,29 @@ import React from 'react';
 class Selector extends React.Component {
 
 state = {
-	algos:'',
-	jobs:'',
-	blogs:'',
-	songWrote:'',
-	songRecorded:'',
-	journalPages:'',
-	letters:'',
-	famCalls:'',
-	frontPlank:'',
-	sidePlank:'',
-	rearPlank:'',
-	burpees:'',
-	pushUps:'',
-	curls:'',
-	chinUps:'',
-	lateral:'',
-	front:'',
-	ohp:'',
-	date:'',
-	color:'',
-	summary:''
+	algo:'0',
+	apps:'0',
+	blog:'0',
+	song_wrote:'0',
+	song_rec:'0',
+	journal:'0',
+	letters:'0',
+	calls:'0',
+	front_p:'0',
+	side_p:'0',
+	rear_p:'0',
+	burpee:'0',
+	push_u:'0',
+	lunges:'0',
+	curls:'0',
+	chin_u:'0',
+	lat_raise:'0',
+	front_raise:'0',
+	ohp:'0',
+	the_date:'',
+	color:'blue',
+	summary:"Today was a great day, can't wait until tomorrow!",
+	mood:''
 }
 
 
@@ -34,12 +36,36 @@ handleOnChange = (e) => {
   
 onSubmit = (e) => {
 	e.preventDefault()
-	alert(this.state.ohp)
+		let daKeys = Object.keys(this.state);
+		let daValues = Object.values(this.state)
+		let newDay = {};
+		let nonIntegers = ["color", "summary", "the_date"]
+		daKeys.map((el, i) => {
+			if (nonIntegers.includes(el)) {
+			newDay[el] = daValues[i]
+		} else {
+			newDay[el] = parseInt(daValues[i], 10)
+		}
+	}
+	)
+
+		console.log(newDay.valueOf(), newDay)
+			fetch('http://localhost:3000/api/v1/days', {
+			 method: "POST",
+			  headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json"
+			  },
+			  body: JSON.stringify({day: newDay})
+			})
+			  .then(res => res.json())
+			  .then(newDay => console.log(newDay) )
 }
+
 
 componentDidMount() {
 	const today = new Date()
-	this.setState({ date: (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear() })
+	this.setState({ the_date: (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear() })
 }
 
 render() {
@@ -47,7 +73,7 @@ render() {
 const today = new Date()
 
 const littleGuy = (formType) => {
-return <input name={formType} type='number' min="0" style={{ width: "45px" }} value={this.state.formType} onChange={this.handleOnChange}/>
+return <input name={formType} type='number' min="0" style={{ width: "45px" }} value={this.state.formType} defaultValue='0' onChange={this.handleOnChange} required/>
 }
   return (
     <div className="selector">
@@ -87,8 +113,8 @@ front raises:{littleGuy('front')}<br/>
 overhead press:{littleGuy('ohp')}<br/>	
 </div><br/>
 --- personal --- <br/><br/>
-today's color:<input type='text' name="color" value={this.state.formType} onChange={this.handleOnChange}/><br/>
-summary:<input type="text" style={{ height: "200px", width: "400px" }}  />
+today's color:<input type='text' name="color" value={this.state.color} onChange={this.handleOnChange}/><br/>
+summary:<textarea style={{ height: "50px", width: "300px" }} name="summary" value={this.state.summary} onChange={this.handleOnChange} />
 <br/><br/><br/><br/><br/>
 <input type="submit" value="Submit this day's damn activity"/>
 </form>
