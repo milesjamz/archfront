@@ -25,7 +25,7 @@ state = {
 	the_date:'',
 	color:'blue',
 	summary:"Today was a great day, can't wait until tomorrow!",
-	mood:''
+	mood:'0'
 }
 
 
@@ -46,15 +46,13 @@ onSubmit = (e) => {
 		} else {
 			newDay[el] = parseInt(daValues[i], 10)
 		}
-	}
-	)
-
-		console.log(newDay.valueOf(), newDay)
+	})
+		// console.log(newDay.valueOf(), newDay)
 			fetch('http://localhost:3000/api/v1/days', {
 			 method: "POST",
 			  headers: {
 				"Content-Type": "application/json",
-				Accept: "application/json"
+				"Accept": "application/json"
 			  },
 			  body: JSON.stringify({day: newDay})
 			})
@@ -81,40 +79,41 @@ Hello, USERNAME - today is {(today.getMonth()+1)+'-'+today.getDate()+'-'+today.g
 What did you do today?<br/><br/>
 <form onSubmit={this.onSubmit} >
 --- job search ---<br/><br/>
-algorithms completed:{littleGuy('algos')}<br/>
-job applications:{littleGuy('jobs')}<br/>
-blogs:{littleGuy('blogs')}<br/><br/>
+algorithms completed:{littleGuy('algo')}<br/>
+job applications:{littleGuy('apps')}<br/>
+blogs:{littleGuy('blog')}<br/><br/>
 --- musical ---<br/><br/>
-songs recorded:{littleGuy('songWrote')}<br/>
-songs written:{littleGuy('songRecorded')}<br/>
-journal pages:{littleGuy('journalPages')}<br/>
+songs recorded:{littleGuy('song_wrote')}<br/>
+songs written:{littleGuy('song_rec')}<br/>
+journal pages:{littleGuy('journal')}<br/>
 personal letters:{littleGuy('letters')}<br/>
-calls to family:{littleGuy('famCalls')}<br/><br/>
+calls to family:{littleGuy('calls')}<br/><br/>
 --- physical --- <br/><br/>
 <div className="core">
-front plank minutes:{littleGuy('frontPlank')}<br/>
-side plank minutes:{littleGuy('sidePlank')}<br/>
+front plank minutes:{littleGuy('front_p')}<br/>
+side plank minutes:{littleGuy('side_p')}<br/>
 
-burpees:{littleGuy('burpees')}<br/>
+burpees:{littleGuy('burpee')}<br/>
 </div>
 <div className="chest">
-push-ups:{littleGuy('pushUps')}<br/>
+push-ups:{littleGuy('push_u')}<br/>
 </div>
 <div className="arms">
 curls:{littleGuy('curls')}<br/>
 </div>
 <div className="back">
-rear plank minutes:{littleGuy('rearPlank')}<br/>
-chin-ups:{littleGuy('chinUps')}<br/>
+rear plank minutes:{littleGuy('rear_p')}<br/>
+chin-ups:{littleGuy('chin_u')}<br/>
 </div>
 <div className="shoulders">
-lateral raises:{littleGuy('lateral')}<br/>
-front raises:{littleGuy('front')}<br/>
+lateral raises:{littleGuy('lat_raise')}<br/>
+front raises:{littleGuy('front_raise')}<br/>
 overhead press:{littleGuy('ohp')}<br/>	
 </div><br/>
 --- personal --- <br/><br/>
+mood:{littleGuy('mood')}<br/>
 today's color:<input type='text' name="color" value={this.state.color} onChange={this.handleOnChange}/><br/>
-summary:<textarea style={{ height: "50px", width: "300px" }} name="summary" value={this.state.summary} onChange={this.handleOnChange} />
+ummary:<textarea style={{ height: "50px", width: "300px" }} name="summary" value={this.state.summary} onChange={this.handleOnChange} />
 <br/><br/><br/><br/><br/>
 <input type="submit" value="Submit this day's damn activity"/>
 </form>
