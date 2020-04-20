@@ -25,7 +25,8 @@ state = {
 	the_date:'',
 	color:'blue',
 	summary:"Today was a great day, can't wait until tomorrow!",
-	mood:'0'
+	mood:'5',
+	user_id:'1'
 }
 
 
@@ -75,7 +76,7 @@ return <input name={formType} type='number' min="0" style={{ width: "45px" }} va
 }
   return (
     <div className="selector">
-Hello, USERNAME - today is {(today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear()}.<br/>
+Hello, you - today is {(today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear()}.<br/>
 What did you do today?<br/><br/>
 <form onSubmit={this.onSubmit} >
 --- job search ---<br/><br/>
@@ -111,9 +112,9 @@ front raises:{littleGuy('front_raise')}<br/>
 overhead press:{littleGuy('ohp')}<br/>	
 </div><br/>
 --- personal --- <br/><br/>
-mood:{littleGuy('mood')}<br/>
+mood:<input name="mood" type='number' min="1" max="10" style={{ width: "45px" }} value={this.state.mood} defaultValue='5' onChange={this.handleOnChange} required/><br/>
 today's color:<input type='text' name="color" value={this.state.color} onChange={this.handleOnChange}/><br/>
-ummary:<textarea style={{ height: "50px", width: "300px" }} name="summary" value={this.state.summary} onChange={this.handleOnChange} />
+summary:<textarea style={{ height: "50px", width: "300px" }} name="summary" value={this.state.summary} onChange={this.handleOnChange} />
 <br/><br/><br/><br/><br/>
 <input type="submit" value="Submit this day's damn activity"/>
 </form>
