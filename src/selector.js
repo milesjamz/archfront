@@ -26,7 +26,8 @@ state = {
 	color:'blue',
 	summary:"Today was a great day, can't wait until tomorrow!",
 	mood:'5',
-	user_id:'1'
+	user_id:'1',
+	username:''
 }
 
 
@@ -63,6 +64,9 @@ onSubmit = (e) => {
 
 
 componentDidMount() {
+	fetch(`http://localhost:3000/api/v1/users/${this.state.user_id}`)
+		.then(resp => resp.json())
+		.then(user => this.setState({ username: user.username }))
 	const today = new Date().toDateString().split(' ')
 	this.setState({ the_date: (today[0] + ', ' + today[2] + ' ' + today[1] + ' ' + today[3]) })
 }
@@ -72,11 +76,12 @@ render() {
 const today = new Date().toDateString().split(' ')
 
 const littleGuy = (formType) => {
-return <input name={formType} type='number' min="0" style={{ width: "45px" }} value={this.state.formType} defaultValue='0' onChange={this.handleOnChange} required/>
+	let theValue = eval(`this.state.${formType}`);
+return <span><input name={formType} type='number' min="0" style={{ width: "45px" }} value={theValue} onChange={this.handleOnChange} required/> </span>
 }
   return (
     <div className="selector">
-Hello, you - today is {today[0] + ', ' + today[2] + ' ' + today[1] + ' ' + today[3]}.<br/>
+Hello, {this.state.username ? this.state.username : 'you' } - today is {today[0] + ', ' + today[2] + ' ' + today[1] + ' ' + today[3]}.<br/>
 What did you do today?<br/><br/>
 <form onSubmit={this.onSubmit} >
 --- job search ---<br/><br/>
@@ -112,7 +117,7 @@ front raises:{littleGuy('front_raise')}<br/>
 overhead press:{littleGuy('ohp')}<br/>	
 </div><br/>
 --- personal --- <br/><br/>
-mood:<input name="mood" type='number' min="1" max="10" style={{ width: "45px" }} value={this.state.mood} defaultValue='5' onChange={this.handleOnChange} required/><br/>
+mood:<input name="mood" type='number' min="1" max="10" style={{ width: "45px" }} value={this.state.mood} onChange={this.handleOnChange} required/><br/>
 today's color:<input type='text' name="color" value={this.state.color} onChange={this.handleOnChange}/><br/>
 summary:<textarea style={{ height: "50px", width: "300px" }} name="summary" value={this.state.summary} onChange={this.handleOnChange} />
 <br/><br/><br/><br/><br/>

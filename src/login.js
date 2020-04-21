@@ -12,11 +12,16 @@ handleOnChange = e => {
     this.setState({ [e.target.name]: e.target.value })
 }
 
+handleOnSubmit = e => {
+    e.preventDefault()
+    console.log(e.target)
+}
+
 render() {
     return (
         <div>
             Login heah<br />
-            <form>
+            <form onSubmit={this.handleOnSubmit}>
             <label>Username:</label>
             <input type='text' name="username" value={this.state.form} onChange={this.handleOnChange}/><br/>
             <label>Password:</label>

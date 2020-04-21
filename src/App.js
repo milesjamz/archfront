@@ -7,10 +7,22 @@ import Chart from './chart'
 import Landing from './landing'
 import Login from './login'
 
-function App() {
+class App extends React.Component {
+  
+  state = {
+    loggedIn:true,
+    currentUser:'Miles'
+  }
+
+  logOut = () => {
+    this.setState({ currentUser:'', loggedIn:false })
+  }
+  
+  render() {
+
   return (
     <div className="App">
-    <NavBar />
+    <NavBar user={this.state.currentUser} loggedIn={this.state.loggedIn} logOut={this.logOut} />
     <Switch>
       <Route exact path='/'>
         <Landing />
@@ -26,7 +38,7 @@ function App() {
       </Route>
     </Switch>
 </div>
-)
-}
+)}
 
+}
 export default App;
