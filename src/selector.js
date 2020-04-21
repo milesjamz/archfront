@@ -63,20 +63,20 @@ onSubmit = (e) => {
 
 
 componentDidMount() {
-	const today = new Date()
-	this.setState({ the_date: (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear() })
+	const today = new Date().toDateString().split(' ')
+	this.setState({ the_date: (today[0] + ', ' + today[2] + ' ' + today[1] + ' ' + today[3]) })
 }
 
 render() {
 
-const today = new Date()
+const today = new Date().toDateString().split(' ')
 
 const littleGuy = (formType) => {
 return <input name={formType} type='number' min="0" style={{ width: "45px" }} value={this.state.formType} defaultValue='0' onChange={this.handleOnChange} required/>
 }
   return (
     <div className="selector">
-Hello, you - today is {(today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear()}.<br/>
+Hello, you - today is {today[0] + ', ' + today[2] + ' ' + today[1] + ' ' + today[3]}.<br/>
 What did you do today?<br/><br/>
 <form onSubmit={this.onSubmit} >
 --- job search ---<br/><br/>
