@@ -27,7 +27,7 @@ const showUserData = () => {
 
     return (
         <div>
-            Hello, {thisGuy.username}!<br/><br/>
+            <strong>Hello, {thisGuy.username}!</strong><br/><br/>
             You have {thisGuy.days.length} {thisGuy.days.length === 1 ? 'day' : 'days'} recorded.<br/><br/>
             algos: {answers['algo']} total, { (Math.round(answers['algo'] / thisGuy.days.length * 2) / 2 )} per day average<br/>
             job applications: {answers['apps']} total, { Math.round(answers['apps'] / thisGuy.days.length * 2) / 2} per day average <br/>
