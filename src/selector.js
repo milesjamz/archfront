@@ -115,7 +115,11 @@ chin-ups:{littleGuy('chin_u')}<br/>
 lateral raises:{littleGuy('lat_raise')}<br/>
 front raises:{littleGuy('front_raise')}<br/>
 overhead press:{littleGuy('ohp')}<br/>	
-</div><br/>
+</div>
+<div className="legs">
+lunges:{littleGuy('lunges')}<br/>	
+</div>
+<br/>
 --- personal --- <br/><br/>
 mood:<input name="mood" type='number' min="1" max="10" style={{ width: "45px" }} value={this.state.mood} onChange={this.handleOnChange} required/><br/>
 today's color:<input type='text' name="color" value={this.state.color} onChange={this.handleOnChange}/><br/>
