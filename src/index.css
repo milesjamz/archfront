@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#regText {
+  width:70vw;
+  padding-left:14%;
+}
+
+p {
+  /* color:blue; */
+  /* width:80px; */
+}

@@ -25,7 +25,7 @@ class App extends React.Component {
     <NavBar user={this.state.currentUser} loggedIn={this.state.loggedIn} logOut={this.logOut} />
     <Switch>
       <Route exact path='/'>
-        <Landing />
+        <Landing user={this.state.currentUser} />
       </Route>
       <Route path='/entry'>
         <Selector />
