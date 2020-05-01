@@ -3,28 +3,45 @@ import React from 'react'
 class Chart extends React.Component {
 
     state = {
-        userData:[]
+        userData:[],
     }
 
 componentDidMount() {
     fetch('http://localhost:3000/api/v1/users/1')
     .then(resp => resp.json())
-    .then(parsedJayson => this.setState({userData: parsedJayson}) )
+    .then(parsedJayson => {
+        console.log(parsedJayson);
+        this.setState({userData: parsedJayson}) 
+    })
 }
 
 render() {
+
+const eachDay = day => {
+    console.log(day)
+    return (
+        <div className="day" key={day.id}>
+            <em>{day.the_date}</em>
+            <p>{day.color}</p>
+            <p>{day.summary}</p>
+        </div>
+    )
+}
 
 const showUserData = () => {
     const thisGuy = this.state.userData 
     let answers = {};
     let shitList = ['created_at','updated_at','user_id','id','the_date','color','summary']
+    let eachLittleOne = thisGuy.days.map(oneDay => eachDay(oneDay))
     thisGuy.days.forEach(function(oneDay) {
     for (let [key, value] of Object.entries(oneDay) ) {
         shitList.includes(key) ? console.log('doesnt belong in list') : answers[key] ? answers[key] += value : answers[key] = value
     }
 })
-    console.log(thisGuy.days, answers)
-
+    // console.log(thisGuy.days, answers);
+ let sortedData = Object.keys(answers).sort(function(a,b){return answers[a] - answers[b] } )
+ let min = sortedData[0]; 
+ let max = sortedData[19];
     return (
         <div>
             <strong>Hello, {thisGuy.username}!</strong><br/><br/>
@@ -50,6 +67,10 @@ const showUserData = () => {
             front raises: {answers['front_raise']} total, {Math.round(answers['front_raise'] / thisGuy.days.length * 2 )/ 2} per day average<br/>
             overhead press: {answers['ohp']} total, {Math.round(answers['ohp'] / thisGuy.days.length * 2 )/ 2} per day average<br/>
             daily mood: {answers['mood']} total, {Math.round(answers['mood'] / thisGuy.days.length * 2 )/ 2} average <br/>
+            </div>
+            The thing you've done the most is {max}, least is {min}. 
+            <div className="dayContainer">
+            {eachLittleOne}
             </div>
         </div>
         )

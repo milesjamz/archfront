@@ -19,3 +19,21 @@ padding-right:700px;
   padding-left:10%;
   border: solid 10px;
 }
+
+/* .day :nth-child(odd){
+  border:solid;
+}
+
+.day :nth-child(even) {
+  border:dotted; */
+/* } */
+
+/* .dayContainer :nth-child(odd) {
+  color:blue;
+  margin-right:500px;
+}
+
+.dayContainer :nth-child(even) {
+  color:red;
+  margin-left:500px;
+} */
