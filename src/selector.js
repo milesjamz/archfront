@@ -60,6 +60,7 @@ onSubmit = (e) => {
 			})
 			  .then(res => res.json())
 			  .then(newDay => console.log(newDay) )
+			alert('Thank you for submitting your data!')
 }
 
 
@@ -67,8 +68,37 @@ componentDidMount() {
 	fetch(`http://localhost:3000/api/v1/users/${this.state.user_id}`)
 		.then(resp => resp.json())
 		.then(user => this.setState({ username: user.username }))
+	// this.setState({ })
 	const today = new Date().toDateString().split(' ')
 	this.setState({ the_date: (today[0] + ', ' + today[2] + ' ' + today[1] + ' ' + today[3]) })
+}
+
+initialState = {
+	algo:'0',
+	apps:'0',
+	blog:'0',
+	song_wrote:'0',
+	song_rec:'0',
+	journal:'0',
+	letters:'0',
+	calls:'0',
+	front_p:'0',
+	side_p:'0',
+	rear_p:'0',
+	burpee:'0',
+	push_u:'0',
+	lunges:'0',
+	curls:'0',
+	chin_u:'0',
+	lat_raise:'0',
+	front_raise:'0',
+	ohp:'0',
+	// the_date:'',
+	color:'blue',
+	summary:"Today was a great day, can't wait until tomorrow!",
+	mood:'5',
+	user_id:'1',
+	username:''
 }
 
 render() {
