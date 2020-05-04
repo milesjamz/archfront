@@ -61,6 +61,7 @@ onSubmit = (e) => {
 			  .then(res => res.json())
 			  .then(newDay => console.log(newDay) )
 			alert('Thank you for submitting your data!')
+			this.resetMyState();
 }
 
 
@@ -93,12 +94,39 @@ initialState = {
 	lat_raise:'0',
 	front_raise:'0',
 	ohp:'0',
-	// the_date:'',
+	the_date:'',
 	color:'blue',
 	summary:"Today was a great day, can't wait until tomorrow!",
 	mood:'5',
 	user_id:'1',
 	username:''
+}
+
+resetMyState = () => {
+	this.setState({
+		algo:'0',
+		apps:'0',
+		blog:'0',
+		song_wrote:'0',
+		song_rec:'0',
+		journal:'0',
+		letters:'0',
+		calls:'0',
+		front_p:'0',
+		side_p:'0',
+		rear_p:'0',
+		burpee:'0',
+		push_u:'0',
+		lunges:'0',
+		curls:'0',
+		chin_u:'0',
+		lat_raise:'0',
+		front_raise:'0',
+		ohp:'0',
+		color:'blue',
+		summary:"Today was a great day, can't wait until tomorrow!",
+		mood:'5',
+	})
 }
 
 render() {
