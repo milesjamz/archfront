@@ -141,9 +141,9 @@ const prettifyDay = day => {
 }
 
 const prettifyDate = date => {
+	// remove leading zeroes from and add proper suffix to date
 	const suffixes = ['st', 'nd', 'rd', 'th']
 	let suffix;
-
 	switch (today[2][1]) {
 		case 1:
 			suffix = suffixes[0]

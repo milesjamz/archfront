@@ -9,9 +9,14 @@
 }
 
 .selector {
+  background-color: lavender;
 height: 140vh;  
 text-align:right;
-padding-right:700px;
+padding-left:30px;
+padding-right:120px;
+margin-left:35%;
+border:solid;
+width:15%;
 }
 
 .dataContainer {
