@@ -132,14 +132,43 @@ resetMyState = () => {
 render() {
 
 const today = new Date().toDateString().split(' ')
+const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+const longDays = ['Monday', 'Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+const prettifyDay = day => {
+	// change return value of todays date from mon tue etc to Monday, Tuesday, etc
+	let daIndex = days.indexOf(day)
+	return longDays[daIndex]
+}
 
+const prettifyDate = date => {
+	const suffixes = ['st', 'nd', 'rd', 'th']
+	let suffix;
+
+	switch (today[2][1]) {
+		case 1:
+			suffix = suffixes[0]
+			break;
+		case 2:
+			suffix = suffixes[1]
+			break;
+		case 3:
+			suffix = suffixes[2]
+			break;
+		default:
+			suffix = suffixes[3]
+	}
+let theDate = parseInt(today[2], 10)
+return theDate + suffix
+}
+
+const prettyDate = prettifyDay(today[0]) + ', ' + today[1] + ' ' + prettifyDate(today[2]) + ', ' + today[3]
 const littleGuy = (formType) => {
 	let theValue = eval(`this.state.${formType}`);
 return <span><input name={formType} type='number' min="0" style={{ width: "45px" }} value={theValue} onChange={this.handleOnChange} required/> </span>
 }
   return (
     <div className="selector">
-Hello, {this.state.username ? this.state.username : 'you' } - today is {today[0] + ', ' + today[2] + ' ' + today[1] + ' ' + today[3]}.<br/>
+Hello, {this.state.username ? this.state.username : 'you' } - today is {prettyDate}.<br/>
 What did you do today?<br/><br/>
 <form onSubmit={this.onSubmit} >
 --- job search ---<br/><br/>
