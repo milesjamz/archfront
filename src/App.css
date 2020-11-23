@@ -26,15 +26,15 @@ width:15%;
   border: solid 10px;
 }
 
-/* .day :nth-child(odd){
+ .day :nth-child(odd){
   border:solid;
 }
 
 .day :nth-child(even) {
-  border:dotted; */
-/* } */
+  border:dotted;
+}
 
-/* .dayContainer :nth-child(odd) {
+.dayContainer :nth-child(odd) {
   color:blue;
   margin-right:500px;
 }
@@ -42,4 +42,4 @@ width:15%;
 .dayContainer :nth-child(even) {
   color:red;
   margin-left:500px;
-} */
+}
