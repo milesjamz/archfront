@@ -32,7 +32,7 @@ state = {
 
 
 handleOnChange = (e) => {
-	console.log('im gay')
+	console.log('hello there')
 	this.setState({ [e.target.name]: e.target.value })
   }
   
