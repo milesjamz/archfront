@@ -12,8 +12,23 @@ class FoodJournal extends React.Component {
 
 render() {
     return (
-        <div>
-            hello muh baby hello my honney
+        <div className='eachPage'>
+            Here's a list of stuff, ok? <br/>
+            <t>
+            <ul>
+                <li>here's some things</li>
+            </ul>
+            </t>
+            <ol>
+                <li>
+                    here's some other things
+                </li>
+            </ol>
+
+            <button onClick={() => alert('fuck my ssweeet pussy')}>
+                push my little ass
+            </button>
+
         </div>
     )
 }
