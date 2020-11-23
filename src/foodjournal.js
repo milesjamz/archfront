@@ -20,17 +20,21 @@ render() {
         <button> and buttons to press to certify it all, baybee</button>
         <form>
         Here's a meal form<br/>
-        What did you eat?<input label='summary of today' type='text'></input><br/>
-        How big a meal was it?<input label='summary of today' type='text'></input><br/>
-        How fast did you shovel it down?<input label='summary of today' type='text'></input>
+        What did you eat?<input type='text'></input><br/>
+        How big a meal was it?(1 to 10)<input type='number' min='0' max='10' ></input><br/>
+        How fast did you shovel it down?(1 to 10)<input type='number' min='0' max='10'></input><br/>
+        What kind of allergens did it have?<input type='number' min='0' max='10'></input><br/>
+        How many calories did it have?<input type='number' min='0'></input><br/>
+        <button>push me push me push me</button>
         </form>
-
+        =-=-=-=-=-==-=-=-=-=-=
         <form>
         Here's a symptom form<br/>
-        What's wrong?<input label='summary of today' type='text'></input><br/>
-        Care to be more specific?<input label='summary of today' type='text'></input><br/>
-        How long did it last<input label='summary of today' type='text'></input><br/>
-        How severe was it?<input label='summary of today' type='text'></input>
+        What's wrong?<input type='text'></input><br/>
+        Care to be more specific?<input type='text'></input><br/>
+        How long did it last(minutes)?<input type='number' min='0' max='10'></input><br/>
+        How severe was it(1 to 10)?<input type='number' min='0' max='10'></input><br/>
+        <button>push me push me push me</button>
         </form>
 
         </div>
