@@ -10,14 +10,20 @@
 }
 
 .selector {
+background-color:linen;
+height:140vh;
+}
+
+.selectorForm {
+  width:30vw;
   background-color: lavender;
-height: 140vh;  
-text-align:right;
-padding-left:30px;
-padding-right:120px;
-margin-left:35%;
-border:solid;
-width:15%;
+  margin-left:35vw;
+  border:solid;
+}
+
+.eachPage {
+  height:200vh;
+  background-color:linen;
 }
 
 .dataContainer {

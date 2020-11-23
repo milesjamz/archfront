@@ -170,7 +170,7 @@ return <span><input name={formType} type='number' min="0" style={{ width: "45px"
     <div className="selector">
 Hello, {this.state.username ? this.state.username : 'you' } - today is {prettyDate}.<br/>
 What did you do today?<br/><br/>
-<form onSubmit={this.onSubmit} >
+<form className ='selectorForm' onSubmit={this.onSubmit} >
 --- job search ---<br/><br/>
 algorithms completed:{littleGuy('algo')}<br/>
 job applications:{littleGuy('apps')}<br/>

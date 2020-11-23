@@ -43,7 +43,7 @@ const showUserData = () => {
  let min = sortedData[0]; 
  let max = sortedData[19];
     return (
-        <div>
+        <div className='eachPage'>
             <strong>Hello, {thisGuy.username}!</strong><br/><br/>
             You have {thisGuy.days.length} {thisGuy.days.length === 1 ? 'day' : 'days'} recorded.<br/><br/>
             <div className='dataContainer'>
