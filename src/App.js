@@ -6,6 +6,7 @@ import Selector from './selector'
 import Chart from './chart'
 import Landing from './landing'
 import Login from './login'
+import FoodJournal from './foodjournal'
 
 class App extends React.Component {
   
@@ -35,6 +36,9 @@ class App extends React.Component {
       </Route>
       <Route path='/login'>
         <Login />
+      </Route>
+      <Route path='/foodjournal'>
+        <FoodJournal />
       </Route>
     </Switch>
 </div>

@@ -19,6 +19,7 @@ height:140vh;
   background-color: lavender;
   margin-left:35vw;
   border:solid;
+  text-align:center;
 }
 
 .eachPage {
@@ -31,7 +32,7 @@ height:140vh;
   padding-left:10%;
   border: solid 10px;
 }
-
+/* 
  .day :nth-child(odd){
   border:solid;
 }
@@ -48,4 +49,4 @@ height:140vh;
 .dayContainer :nth-child(even) {
   color:red;
   margin-left:500px;
-}
+} */
