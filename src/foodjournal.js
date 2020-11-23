@@ -25,10 +25,6 @@ render() {
                 </li>
             </ol>
 
-            <button onClick={() => alert('fuck my ssweeet pussy')}>
-                push my little ass
-            </button>
-
         </div>
     )
 }
