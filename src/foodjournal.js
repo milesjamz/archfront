@@ -17,35 +17,52 @@ class FoodJournal extends React.Component {
         console.log(`${this.API}allergens`)
         fetch(`${this.API}allergens`)
         .then(resp => resp.json())
-        .then(data => this.setState({allergens: data}))
+        .then(data => {
+            this.setState({allergens: data})
+            this.addBoxValues()
+        })
     }
 
-    onChange(e) {
-        console.log(e.target.id)
+    addBoxValues() {
+        this.state.allergens.map(allergen => {
+            this.setState({[allergen.name]: false})
+        })
     }
 
     handleOnChange(e) {
-        console.log(e)
+        console.log(e.target.id)
+        let theThing = e.target.id
+        console.log(this)
+        // if (this.state.theThing === false) {
+        // this.setState({[theThing]: true})
+        // } else {
+        //     this.setState({[theThing]: false})
+        // }
+    }
+
+    onSubmit() {
+        console.log('hey')
     }
 
 render() {
 
 const allergenBox = (allergen) => {
-    console.log(allergen)
+    // console.log(allergen)
+    const myName = allergen.name
     return (
         <div key={allergen.id}>
             <label>{allergen.name}</label>
             <input type='checkbox' 
                 key={allergen.id} 
                 id={allergen.name} 
-                checked={this.state.dude} 
-                onChange={this.onChange} />  
+                checked={`this.state.${myName}`} 
+                onChange={this.handleOnChange} />  
         </div>
     )
 }
 
 const addAllergens = () => {
-    console.log('doop de doo')
+    // console.log('doop de doo')
     if (this.state.allergens) {
          return this.state.allergens.map(allergen => allergenBox(allergen) )
             }
@@ -60,7 +77,7 @@ const addInput = (name, type) => {
         and a form for your symptoms today,<br/>
         and a form for your exercises today.<br/>
         <button> and buttons to press to certify it all, baybee</button>
-        <form>
+        <form className ='selectorForm' onSubmit={this.onSubmit}>
         Here's a meal form<br/>
         What did you eat?{addInput('mealName','text')}<br/>
         How big a meal was it?(1 to 10){addInput('mealSize','number')}<br/>
