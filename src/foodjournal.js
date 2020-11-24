@@ -4,7 +4,11 @@ class FoodJournal extends React.Component {
 
     state = {
         allergens: [],
-        dude: false
+        mealName:'',
+        mealSize:5,
+        mealSpeed:5,
+        mealCals:0,
+        dude: true
     }
 
     API = 'http://localhost:3000/api/v1/'
@@ -16,8 +20,12 @@ class FoodJournal extends React.Component {
         .then(data => this.setState({allergens: data}))
     }
 
-    handleInputChange() {
-        console.log('dude')
+    onChange(e) {
+        console.log(e.target.id)
+    }
+
+    handleOnChange(e) {
+        console.log(e)
     }
 
 render() {
@@ -25,13 +33,13 @@ render() {
 const allergenBox = (allergen) => {
     console.log(allergen)
     return (
-        <div>
+        <div key={allergen.id}>
             <label>{allergen.name}</label>
             <input type='checkbox' 
                 key={allergen.id} 
                 id={allergen.name} 
                 checked={this.state.dude} 
-                onChange={this.handleInputChange} />  
+                onChange={this.onChange} />  
         </div>
     )
 }
@@ -42,7 +50,9 @@ const addAllergens = () => {
          return this.state.allergens.map(allergen => allergenBox(allergen) )
             }
     }
-
+const addInput = (name, type) => {
+    return <span><input name={name} type={type} onChange={this.handleOnChange} required/> </span>
+}
     return (
         <div className='eachPage'>
             Here's a list of stuff, ok? <br/>
@@ -52,12 +62,12 @@ const addAllergens = () => {
         <button> and buttons to press to certify it all, baybee</button>
         <form>
         Here's a meal form<br/>
-        What did you eat?<input type='text'></input><br/>
-        How big a meal was it?(1 to 10)<input type='number' min='0' max='10' ></input><br/>
-        How fast did you shovel it down?(1 to 10)<input type='number' min='0' max='10'></input><br/>
+        What did you eat?{addInput('mealName','text')}<br/>
+        How big a meal was it?(1 to 10){addInput('mealSize','number')}<br/>
+        How fast did you shovel it down?(1 to 10){addInput('mealSpeed','number')}<br/>
+        How many calories did it have?{addInput('mealCals','number')}<br/>
         What kind of allergens did it have?<br/>
         {addAllergens()}
-        How many calories did it have?<input type='number' min='0'></input><br/>
         <button>push me push me push me</button>
         </form>
         =-=-=-=-=-==-=-=-=-=-=
