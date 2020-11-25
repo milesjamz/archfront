@@ -30,7 +30,6 @@ class FoodJournal extends React.Component {
     handleOnChange = (e) => {
         console.log(e.target.id, e.target.value, e.target.type)
         if (e.target.type === 'checkbox')  {
-            console.log(e.target.id, ![e.target.id], [`this.state.${e.target.id}`])
             this.setState({[e.target.id]: e.target.checked })
         } else {
         this.setState({ [e.target.name]: e.target.value })
@@ -39,7 +38,7 @@ class FoodJournal extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        console.log('hey')
+        console.log(e)
     }
 
 render() {
@@ -63,8 +62,16 @@ const addAllergens = () => {
          return this.state.allergens.map(allergen => allergenBox(allergen) )
             }
     }
-const addInput = (name, type) => {
+const addInput = (name, type, params) => {
+    if (type === 'number') {
+        if (params === 'oneTen') {
+            return <span> <input name={name} id ={name} type={type} value={[this.state.type]} onChange={this.handleOnChange} min='0' max='10' required/> </span>
+        } else {
+            return <span> <input name={name} id ={name} type={type} value={this.state.type} onChange={this.handleOnChange} min='0' required/> </span>
+        }
+    } else {
     return <span> <input name={name} id ={name} type={type} value={this.state.type} onChange={this.handleOnChange} required/> </span>
+    }
 }
     return (
         <div className='eachPage'>
@@ -76,12 +83,12 @@ const addInput = (name, type) => {
         <form className ='selectorForm' onSubmit={this.onSubmit}>
         Here's a meal form<br/>
         What did you eat?{addInput('mealName','text')}<br/>
-        How big a meal was it?(1 to 10){addInput('mealSize','number')}<br/>
-        How fast did you shovel it down?(1 to 10){addInput('mealSpeed','number')}<br/>
+        How big a meal was it?(1 to 10){addInput('mealSize','number','oneTen')}<br/>
+        How fast did you shovel it down?(1 to 10){addInput('mealSpeed','number','oneTen')}<br/>
         How many calories did it have?{addInput('mealCals','number')}<br/>
         What kind of allergens did it have?<br/>
         {addAllergens()}
-        <button>push me push me push me</button>
+        <input type='submit' value='push me'/>
         </form>
         =-=-=-=-=-==-=-=-=-=-=
         <form className ='selectorForm' onSubmit={this.onSubmit}>
@@ -90,7 +97,7 @@ const addInput = (name, type) => {
         Care to be more specific?{addInput('symptomSummary','text')}<br/>
         How long did it last(minutes)?{addInput('symptomLength','number')}<br/>
         How severe was it(1 to 10)?{addInput('symptomSeverity','number')}<br/>
-        <button>push me push me push me</button>
+        <input type='submit' value='push me'/>
         </form>
 
         </div>
