@@ -33,11 +33,6 @@ class FoodJournal extends React.Component {
         console.log(e.target.id)
         let theThing = e.target.id
         console.log(this)
-        // if (this.state.theThing === false) {
-        // this.setState({[theThing]: true})
-        // } else {
-        //     this.setState({[theThing]: false})
-        // }
     }
 
     onSubmit() {
@@ -68,7 +63,7 @@ const addAllergens = () => {
             }
     }
 const addInput = (name, type) => {
-    return <span><input name={name} type={type} onChange={this.handleOnChange} required/> </span>
+    return <span><input name={name} id ={name} type={type} onChange={this.handleOnChange} required/> </span>
 }
     return (
         <div className='eachPage'>
