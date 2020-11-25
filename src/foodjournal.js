@@ -28,34 +28,31 @@ class FoodJournal extends React.Component {
     }
 
     handleOnChange = (e) => {
-        console.log(e.target.id, e.target.value)
-        let allergyNames = this.state.allergens.map(allergen => allergen.name);
-        if (allergyNames.includes(e.target.id) ) {
-            console.log('it woiked')
-            let myAllergen = e.target.id;
-            this.setState({[e.target.id]: ![this.state.myAllergen] })
+        console.log(e.target.id, e.target.value, e.target.type)
+        if (e.target.type === 'checkbox')  {
+            console.log(e.target.id, ![e.target.id], [`this.state.${e.target.id}`])
+            this.setState({[e.target.id]: e.target.checked })
         } else {
         this.setState({ [e.target.name]: e.target.value })
         }
-        console.log(this.state)
     }
 
-    onSubmit() {
+    onSubmit = (e) => {
+        e.preventDefault()
         console.log('hey')
     }
 
 render() {
 
 const allergenBox = (allergen) => {
-    // console.log(allergen)
-    const myName = allergen.name
+    // const myName = allergen.name
     return (
         <div key={allergen.id}>
             <label>{allergen.name}</label>
             <input type='checkbox' 
                 key={allergen.id} 
                 id={allergen.name} 
-                // checked={`this.state.${myName}`} 
+                // checked={this.state.myName} 
                 onChange={this.handleOnChange} />  
         </div>
     )
@@ -87,12 +84,12 @@ const addInput = (name, type) => {
         <button>push me push me push me</button>
         </form>
         =-=-=-=-=-==-=-=-=-=-=
-        <form>
+        <form className ='selectorForm' onSubmit={this.onSubmit}>
         Here's a symptom form<br/>
-        What's wrong?<input type='text'></input><br/>
-        Care to be more specific?<input type='text'></input><br/>
-        How long did it last(minutes)?<input type='number' min='0' max='10'></input><br/>
-        How severe was it(1 to 10)?<input type='number' min='0' max='10'></input><br/>
+        What's wrong?{addInput('symptomName','text')}<br/>
+        Care to be more specific?{addInput('symptomSummary','text')}<br/>
+        How long did it last(minutes)?{addInput('symptomLength','number')}<br/>
+        How severe was it(1 to 10)?{addInput('symptomSeverity','number')}<br/>
         <button>push me push me push me</button>
         </form>
 
