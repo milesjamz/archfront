@@ -14,6 +14,7 @@ class FoodJournal extends React.Component {
         symptomSeverity:"",
         coffee:0,
         alcohol:0,
+        daySummary:''
     }
 
     API = 'http://localhost:3000/api/v1/'
@@ -83,7 +84,6 @@ const addInput = (name, type, params) => {
 }
     return (
         <div className='eachPage'>
-        Here's a list of stuff, ok? <br/>
         Today is {this.state.the_date}.<br/>
         <form className='selectorForm' name='intake' onSubmit={this.onSubmit}>
         M E A L - = - F O R M<br/>
@@ -92,11 +92,9 @@ const addInput = (name, type, params) => {
         How fast did you shovel it down?(1 to 10){addInput('mealSpeed','number','oneTen')}<br/>
         How many calories did it have?{addInput('mealCals','number')}<br/>
         What kind of allergens did it have?<br/>
-        {addAllergens()}<br/>
+        {addAllergens()}
         <input type='submit' value='push me'/>
         </form>
-        <button onClick={() => alert('a nice lil pick me up, eh')}>☕a cup of joe☕</button><br/>
-        <button onClick={() => alert('feelin tipsy')}>🍺a drink🍺</button><br/><br/>  
         <form className='selectorForm' name='symptoms' onSubmit={this.onSubmit}>
         S Y M P T O M - = - F O R M<br/>
         What's wrong?{addInput('symptomName','text')}<br/>
@@ -105,6 +103,14 @@ const addInput = (name, type, params) => {
         How severe was it(1 to 10)?{addInput('symptomSeverity','number')}<br/>
         <input type='submit' value='push me'/>
         </form>
+        <form className='selectorForm' name='summary' onSubmit={this.onSubmit}>
+        D A Y - = - S U M M A R Y<br/>
+        {this.props.user}, you've currently reported X meals, Y symptoms, Z coffees and A drinks.<br/>
+        Care to summarize your day overall?<br/>
+        {addInput('symptomName','text')}<br/>
+        </form>
+        <button onClick={() => alert('a nice lil pick me up, eh')}>☕a cup of joe☕</button><br/>
+        <button onClick={() => alert('feelin tipsy')}>🍺a drink🍺</button><br/><br/> 
         </div>
             )
     }

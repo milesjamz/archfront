@@ -38,7 +38,7 @@ class App extends React.Component {
         <Login />
       </Route>
       <Route path='/foodjournal'>
-        <FoodJournal />
+        <FoodJournal user={this.state.currentUser} />
       </Route>
     </Switch>
 </div>
