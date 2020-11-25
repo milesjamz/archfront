@@ -10,7 +10,7 @@ componentDidMount() {
     fetch('http://localhost:3000/api/v1/users/1')
     .then(resp => resp.json())
     .then(parsedJayson => {
-        console.log(parsedJayson);
+        // console.log(parsedJayson);
         this.setState({userData: parsedJayson}) 
     })
 }
@@ -18,7 +18,7 @@ componentDidMount() {
 render() {
 
 const eachDay = day => {
-    console.log(day)
+    // console.log(day)
     return (
         <div className="day" key={day.id}>
             <em>{day.the_date}</em>

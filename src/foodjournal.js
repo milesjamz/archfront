@@ -8,13 +8,11 @@ class FoodJournal extends React.Component {
         mealSize:5,
         mealSpeed:5,
         mealCals:0,
-        dude: true
     }
 
     API = 'http://localhost:3000/api/v1/'
 
     componentDidMount() {
-        console.log(`${this.API}allergens`)
         fetch(`${this.API}allergens`)
         .then(resp => resp.json())
         .then(data => {
@@ -29,10 +27,17 @@ class FoodJournal extends React.Component {
         })
     }
 
-    handleOnChange(e) {
-        console.log(e.target.id)
-        let theThing = e.target.id
-        console.log(this)
+    handleOnChange = (e) => {
+        console.log(e.target.id, e.target.value)
+        let allergyNames = this.state.allergens.map(allergen => allergen.name);
+        if (allergyNames.includes(e.target.id) ) {
+            console.log('it woiked')
+            let myAllergen = e.target.id;
+            this.setState({[e.target.id]: ![this.state.myAllergen] })
+        } else {
+        this.setState({ [e.target.name]: e.target.value })
+        }
+        console.log(this.state)
     }
 
     onSubmit() {
@@ -50,20 +55,19 @@ const allergenBox = (allergen) => {
             <input type='checkbox' 
                 key={allergen.id} 
                 id={allergen.name} 
-                checked={`this.state.${myName}`} 
+                // checked={`this.state.${myName}`} 
                 onChange={this.handleOnChange} />  
         </div>
     )
 }
 
 const addAllergens = () => {
-    // console.log('doop de doo')
     if (this.state.allergens) {
          return this.state.allergens.map(allergen => allergenBox(allergen) )
             }
     }
 const addInput = (name, type) => {
-    return <span><input name={name} id ={name} type={type} onChange={this.handleOnChange} required/> </span>
+    return <span> <input name={name} id ={name} type={type} value={this.state.type} onChange={this.handleOnChange} required/> </span>
 }
     return (
         <div className='eachPage'>
@@ -93,9 +97,8 @@ const addInput = (name, type) => {
         </form>
 
         </div>
-    )
+            )
+    }
 }
 
-}
-
-export default FoodJournal
+export default FoodJournal;
