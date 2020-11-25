@@ -8,6 +8,12 @@ class FoodJournal extends React.Component {
         mealSize:5,
         mealSpeed:5,
         mealCals:0,
+        symptomName:'',
+        symptomSummary:'',
+        symptomLength:"",
+        symptomSeverity:"",
+        coffee:0,
+        alcohol:0,
     }
 
     API = 'http://localhost:3000/api/v1/'
@@ -19,6 +25,8 @@ class FoodJournal extends React.Component {
             this.setState({allergens: data})
             this.addBoxValues()
         })
+        const today = new Date().toDateString().split(' ')
+        this.setState({ the_date: (today[0] + ', ' + today[2] + ' ' + today[1] + ' ' + today[3]) })
     }
 
     addBoxValues() {
@@ -38,7 +46,7 @@ class FoodJournal extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        console.log(e)
+        console.log(e.target)
     }
 
 render() {
@@ -65,7 +73,7 @@ const addAllergens = () => {
 const addInput = (name, type, params) => {
     if (type === 'number') {
         if (params === 'oneTen') {
-            return <span> <input name={name} id ={name} type={type} value={[this.state.type]} onChange={this.handleOnChange} min='0' max='10' required/> </span>
+            return <span> <input name={name} id ={name} type={type} value={this.state.type} onChange={this.handleOnChange} min='0' max='10' required/> </span>
         } else {
             return <span> <input name={name} id ={name} type={type} value={this.state.type} onChange={this.handleOnChange} min='0' required/> </span>
         }
@@ -75,31 +83,28 @@ const addInput = (name, type, params) => {
 }
     return (
         <div className='eachPage'>
-            Here's a list of stuff, ok? <br/>
-        There will be a form for your meals today,<br/>
-        and a form for your symptoms today,<br/>
-        and a form for your exercises today.<br/>
-        <button> and buttons to press to certify it all, baybee</button>
-        <form className ='selectorForm' onSubmit={this.onSubmit}>
-        Here's a meal form<br/>
+        Here's a list of stuff, ok? <br/>
+        Today is {this.state.the_date}.<br/>
+        <form className='selectorForm' name='intake' onSubmit={this.onSubmit}>
+        M E A L - = - F O R M<br/>
         What did you eat?{addInput('mealName','text')}<br/>
         How big a meal was it?(1 to 10){addInput('mealSize','number','oneTen')}<br/>
         How fast did you shovel it down?(1 to 10){addInput('mealSpeed','number','oneTen')}<br/>
         How many calories did it have?{addInput('mealCals','number')}<br/>
         What kind of allergens did it have?<br/>
-        {addAllergens()}
+        {addAllergens()}<br/>
         <input type='submit' value='push me'/>
         </form>
-        =-=-=-=-=-==-=-=-=-=-=
-        <form className ='selectorForm' onSubmit={this.onSubmit}>
-        Here's a symptom form<br/>
+        <button onClick={() => alert('a nice lil pick me up, eh')}>☕a cup of joe☕</button><br/>
+        <button onClick={() => alert('feelin tipsy')}>🍺a drink🍺</button><br/><br/>  
+        <form className='selectorForm' name='symptoms' onSubmit={this.onSubmit}>
+        S Y M P T O M - = - F O R M<br/>
         What's wrong?{addInput('symptomName','text')}<br/>
         Care to be more specific?{addInput('symptomSummary','text')}<br/>
         How long did it last(minutes)?{addInput('symptomLength','number')}<br/>
         How severe was it(1 to 10)?{addInput('symptomSeverity','number')}<br/>
         <input type='submit' value='push me'/>
         </form>
-
         </div>
             )
     }
