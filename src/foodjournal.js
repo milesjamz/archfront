@@ -53,6 +53,7 @@ class FoodJournal extends React.Component {
 render() {
 
 const allergenBox = (allergen) => {
+    // adds allergen checkboxes dynamically
     // const myName = allergen.name
     return (
         <div key={allergen.id}>
@@ -72,6 +73,7 @@ const addAllergens = () => {
             }
     }
 const addInput = (name, type, params) => {
+    // adds an input to form, using dynamic ability to creat text or number fields
     if (type === 'number') {
         if (params === 'oneTen') {
             return <span> <input name={name} id ={name} type={type} value={this.state.type} onChange={this.handleOnChange} min='0' max='10' required/> </span>
@@ -87,6 +89,7 @@ const addInput = (name, type, params) => {
         Today is {this.state.the_date}.<br/>
         <form className='selectorForm' name='intake' onSubmit={this.onSubmit}>
         M E A L - = - F O R M<br/>
+        Thing to select previous meal types, hehe<br/>
         What did you eat?{addInput('mealName','text')}<br/>
         How big a meal was it?(1 to 10){addInput('mealSize','number','oneTen')}<br/>
         How fast did you shovel it down?(1 to 10){addInput('mealSpeed','number','oneTen')}<br/>
@@ -97,6 +100,7 @@ const addInput = (name, type, params) => {
         </form>
         <form className='selectorForm' name='symptoms' onSubmit={this.onSubmit}>
         S Y M P T O M - = - F O R M<br/>
+        Thing to select previous symptom types, hehe<br/>
         What's wrong?{addInput('symptomName','text')}<br/>
         Care to be more specific?{addInput('symptomSummary','text')}<br/>
         How long did it last(minutes)?{addInput('symptomLength','number')}<br/>
