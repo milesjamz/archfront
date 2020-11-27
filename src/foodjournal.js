@@ -47,10 +47,25 @@ class FoodJournal extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        console.log(e.target)
+        // console.log(e.target)
+        if (e.target.name === 'meal') {
+            const theAllergens = this.state.allergens.map(allergen => allergen.name);
+            const stateForms = ['mealName','mealSize','mealSpeed','mealCals'];
+            const allOfEm = theAllergens.concat(stateForms);
+            console.log(allOfEm)
+            const myMeal = {}
+            console.log(this)
+            console.log(allOfEm.map(name => {
+                console.log(this.state.name)
+                return this.state.name
+            }
+                )
+            )}
     }
 
 render() {
+
+    // console.log(this.state.allergens.map(allergen => allergen.name))
 
 const allergenBox = (allergen) => {
     // adds allergen checkboxes dynamically
@@ -87,7 +102,7 @@ const addInput = (name, type, params) => {
     return (
         <div className='eachPage'>
         Today is {this.state.the_date}.<br/>
-        <form className='selectorForm' name='intake' onSubmit={this.onSubmit}>
+        <form className='selectorForm' name='meal' onSubmit={this.onSubmit}>
         M E A L - = - F O R M<br/>
         Thing to select previous meal types, hehe<br/>
         What did you eat?{addInput('mealName','text')}<br/>
@@ -109,7 +124,7 @@ const addInput = (name, type, params) => {
         </form>
         <form className='selectorForm' name='summary' onSubmit={this.onSubmit}>
         D A Y - = - S U M M A R Y<br/>
-        {this.props.user}, you've currently reported X meals, Y symptoms, Z coffees and A drinks.<br/>
+        {this.props.user.username}, you've currently reported X meals, Y symptoms, Z coffees and A drinks.<br/>
         Care to summarize your day overall?<br/>
         {addInput('symptomName','text')}<br/>
         </form>

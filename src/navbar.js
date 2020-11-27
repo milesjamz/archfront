@@ -7,7 +7,7 @@ const toggler = (boolean) => {
 if (boolean === false) {
   return <span> <Link to='/login'>Log In</Link></span>
 } else {
-  return <span> <Link to='/userchart'>calendar</Link> || <Link to='/entry'>daily entry</Link> || <Link to='/foodjournal'>food journal</Link> || <button onClick={props.logOut} > log out </button> || {props.user} </span>
+  return <span> <Link to='/userchart'>calendar</Link> || <Link to='/entry'>daily entry</Link> || <Link to='/foodjournal'>food journal</Link> || <button onClick={props.logOut} > log out </button> || {props.user.name} </span>
  }
 }
 

@@ -12,11 +12,19 @@ class App extends React.Component {
   
   state = {
     loggedIn:true,
-    currentUser:'Miles'
+    currentUser:''
   }
 
   logOut = () => {
     this.setState({ currentUser:'', loggedIn:false })
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3000/api/v1/users/1')
+    .then(resp => resp.json())
+    .then(user => {
+      this.setState({currentUser: user})
+    })
   }
   
   render() {
