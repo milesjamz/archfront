@@ -52,18 +52,16 @@ class FoodJournal extends React.Component {
             const theAllergens = this.state.allergens.map(allergen => allergen.name);
             const stateForms = ['mealName','mealSize','mealSpeed','mealCals'];
             const allOfEm = theAllergens.concat(stateForms);
-            console.log(allOfEm)
+            const derState = Object.keys(this.state)
+            const nonApp = derState.filter(oneThing => !allOfEm.includes(oneThing))
+            console.log(nonApp)
+            // console.log(daState.filter(oneThing => allOfEm.includes(oneThing)))
             const myMeal = {}
-            console.log(this)
-            console.log(allOfEm.map(name => {
-                console.log(this.state.name)
-                return this.state.name
             }
-                )
-            )}
     }
 
 render() {
+    // console.log(Object.keys(this.state) )
 
     // console.log(this.state.allergens.map(allergen => allergen.name))
 
