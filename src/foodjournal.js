@@ -12,11 +12,13 @@ class FoodJournal extends React.Component {
         symptomSummary:'',
         symptomLength:"",
         symptomSeverity:"",
-        coffee:'',
-        alcohol:'',
+        caffiene:'Coffee And Almond Milk',
+        alcohol:'Beer',
         daySummary:'',
         the_date:'',
         food_day_id:'',
+        aQuantity:'',
+        cQuantity:''
     }
 
     API = 'http://localhost:3000/api/v1/'
@@ -67,7 +69,8 @@ class FoodJournal extends React.Component {
     }
 
     handleOnChange = (e) => {
-        console.log(e.target.id, e.target.value, e.target.type)
+        // console.log(e.target.id, e.target.value, e.target.type, e.target.name)
+        console.log(e.target)
         if (e.target.type === 'checkbox')  {
             this.setState({[e.target.id]: e.target.checked })
         } else {
@@ -77,9 +80,9 @@ class FoodJournal extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        console.log(e.target.id)
+        console.log(e.target.id, e.target)
         if (e.target.id === 'meal') {
-            console.log('im not gay')
+            console.log('im not mad at ya')
             const theAllergens = this.state.allergens.map(allergen => allergen.name);
             const stateForms = ['name','quantity','speed','calories','food_day_id'];
             const allOfEm = theAllergens.concat(stateForms);
@@ -114,13 +117,29 @@ class FoodJournal extends React.Component {
                  .then(newDay => console.log(mealEntry) )
                alert('Thank you for submitting your data!')
             //    this.resetMyState();
+        } else if(e.target.name === 'caffiene' || e.target.name === 'alcohol') {
+            console.log('its woikin', e.target)
+            let tityType = e.target.name === 'caffiene' ? 'cQuantity' : 'aQuantity'
+            const newDrink = {
+                food_day_id:this.state.food_day_id,
+                drink_type:this.state[e.target.name],
+                quantity: parseInt(this.state[tityType], 10)
+            }
+            console.log(newDrink)
+            fetch(`http://localhost:3000/api/v1/drinks`, {
+                method: "POST",
+                 headers: {
+                   "Content-Type": "application/json",
+                   "Accept": "application/json"
+                 },
+                 body: JSON.stringify({drink: newDrink})
+               })
+                 .then(res => res.json())
+                 .then(parsedResp => console.log(parsedResp) )
         }
     }
 
 render() {
-    // console.log(Object.keys(this.state) )
-    // console.log(this.state.allergens.map(allergen => allergen.name))
-
 const allergenBox = (allergen) => {
     // adds allergen checkboxes dynamically
     // const myName = allergen.name
@@ -167,20 +186,23 @@ const addInput = (formName, type, params) => {
         {addAllergens()}
         <input type='submit' value='push me'/>
         </form>
-        <form className='selectorForm' name='drinks'>
-        D R I N K -=- F O R M<br />
+        <form className='selectorForm' name='caffiene' onSubmit={this.onSubmit} >
+        C A F F E I N E -=- F O R M<br />
         
-        Caffiene:                            <select>
-                                        <option>Coffee & Almond Milk</option>
-                                        <option>Coffee & cream</option>
-                                        <option>Energy Drink/Soda</option></select>
-                                        <input type='number' min='1' required/>
+        Caffiene:                   <select name='caffiene' value={this.state.caffiene} onChange={this.handleOnChange}>
+                                        <option value='Coffee And Almond Milk'>Coffee And Almond Milk</option>
+                                        <option value='Coffee And Cream'>Coffee And Cream</option>
+                                        <option value='Energy Drink'>Energy Drink</option></select>
+                                        <input onChange={this.handleOnChange} name='cQuantity' type='number' min='1' required/>
                                         <input type='submit' value='Add me'/><br/>
-        Alcohol:                            <select>
-                                        <option>Beer</option>
-                                        <option>Wine</option>
-                                        <option>Spirits</option></select>
-                                        <input type='number' min='1' required/>
+        </form>
+        <form className='selectorForm' name='alcohol' onSubmit={this.onSubmit}>
+        A L C O H O L -=- F O R M<br />
+        Alcohol:                    <select name='alcohol' value={this.state.alcohol} onChange={this.handleOnChange}>
+                                        <option value='Beer'>Beer</option>
+                                        <option value='Wine'>Wine</option>
+                                        <option value='Liquor'>Liquor</option></select>
+                                        <input onChange={this.handleOnChange} name='aQuantity' type='number' min='1' required/>
                                         <input type='submit' value='Add me'/><br/><br/> 
         </form> 
         <form className='selectorForm' name='symptoms' onSubmit={this.onSubmit}>
