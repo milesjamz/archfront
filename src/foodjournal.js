@@ -12,11 +12,11 @@ class FoodJournal extends React.Component {
         symptomSummary:'',
         symptomLength:"",
         symptomSeverity:"",
-        coffee:0,
-        alcohol:0,
+        coffee:'',
+        alcohol:'',
         daySummary:'',
         the_date:'',
-        food_day_id:''
+        food_day_id:'',
     }
 
     API = 'http://localhost:3000/api/v1/'
@@ -167,6 +167,22 @@ const addInput = (formName, type, params) => {
         {addAllergens()}
         <input type='submit' value='push me'/>
         </form>
+        <form className='selectorForm' name='drinks'>
+        D R I N K -=- F O R M<br />
+        
+        Caffiene:                            <select>
+                                        <option>Coffee & Almond Milk</option>
+                                        <option>Coffee & cream</option>
+                                        <option>Energy Drink/Soda</option></select>
+                                        <input type='number' min='1' required/>
+                                        <input type='submit' value='Add me'/><br/>
+        Alcohol:                            <select>
+                                        <option>Beer</option>
+                                        <option>Wine</option>
+                                        <option>Spirits</option></select>
+                                        <input type='number' min='1' required/>
+                                        <input type='submit' value='Add me'/><br/><br/> 
+        </form> 
         <form className='selectorForm' name='symptoms' onSubmit={this.onSubmit}>
         S Y M P T O M - = - F O R M<br/>
         Thing to select previous symptom types, hehe<br/>
@@ -182,8 +198,6 @@ const addInput = (formName, type, params) => {
         Care to summarize your day overall?<br/>
         {addInput('symptomName','text')}<br/>
         </form>
-        <button onClick={() => alert('a nice lil pick me up, eh')}><span role='img' aria-label='Coffee Cup'>☕</span>a cup of joe<span role='img' aria-label='Coffee Cup'>☕</span></button><br/>
-        <button onClick={() => alert('feelin tipsy')}><span role='img' aria-label='Coffee Cup'>🍺</span>a drink<span role='img' aria-label='Coffee Cup'>🍺 </span></button><br/><br/> 
         </div>
             )
     }
