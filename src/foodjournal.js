@@ -58,13 +58,17 @@ class FoodJournal extends React.Component {
             const theAllergens = this.state.allergens.map(allergen => allergen.name);
             const stateForms = ['name','quantity','speed','calories','the_date'];
             const allOfEm = theAllergens.concat(stateForms);
-            // finds all the allergens in my state and saves as object
+            // finds all the dynamic allergens in my state and saves as object
             let listOfMealAllergens = {};
             this.state.allergens.map(allergen => {
                 console.log('hello buddy', allergen.name)
                 listOfMealAllergens[allergen.name] = this.state[allergen.name]
             })
-            console.log(listOfMealAllergens)
+            const mealAllergenz = []
+            for (const allergenz in listOfMealAllergens) {
+                listOfMealAllergens[allergenz] === true ? mealAllergenz.push(allergenz) : console.log(`${allergenz} was false`)
+            }
+            console.log(listOfMealAllergens, mealAllergenz)
             // const derState = Object.keys(this.state)
             // const nonApp = derState.filter(oneThing => !allOfEm.includes(oneThing))
             let mealEntry = {};
