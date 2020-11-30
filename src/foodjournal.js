@@ -15,7 +15,8 @@ class FoodJournal extends React.Component {
         coffee:0,
         alcohol:0,
         daySummary:'',
-        the_date:''
+        the_date:'',
+        food_day_id:''
     }
 
     API = 'http://localhost:3000/api/v1/'
@@ -27,12 +28,36 @@ class FoodJournal extends React.Component {
             this.setState({allergens: data})
             this.addBoxValues()
         })
+
         const today = new Date().toDateString().split(' ')
+        const properDate = today[0] + ', ' + today[2] + ' ' + today[1] + ' ' + today[3]
+        console.log(properDate)
         this.setState({ the_date: (today[0] + ', ' + today[2] + ' ' + today[1] + ' ' + today[3]) })
+
         fetch(`${this.API}food_days`)
         .then(resp => resp.json())
-        .then(data => console.log(data)
-        )
+        .then(data => {
+            console.log(data)
+            this.setState({food_day_id: data[0].id})
+            })
+        const myFoodDay = {
+            the_date:properDate,
+            user_id:1,
+            summary:''
+        }
+        console.log(myFoodDay)
+        fetch(`${this.API}food_days`, {
+                method: "POST",
+                 headers: {
+                   "Content-Type": "application/json",
+                   "Accept": "application/json"
+                 },
+                 body: JSON.stringify({food_day: myFoodDay})
+               })
+                 .then(res => res.json())
+                 .then(newDay => {
+                     console.log(newDay)
+                    })
     }
 
     addBoxValues() {
@@ -56,7 +81,7 @@ class FoodJournal extends React.Component {
         if (e.target.id === 'meal') {
             console.log('im not gay')
             const theAllergens = this.state.allergens.map(allergen => allergen.name);
-            const stateForms = ['name','quantity','speed','calories','the_date'];
+            const stateForms = ['name','quantity','speed','calories','food_day_id'];
             const allOfEm = theAllergens.concat(stateForms);
             // finds all the dynamic allergens in my state and saves as object
             let listOfMealAllergens = {};
@@ -94,7 +119,6 @@ class FoodJournal extends React.Component {
 
 render() {
     // console.log(Object.keys(this.state) )
-
     // console.log(this.state.allergens.map(allergen => allergen.name))
 
 const allergenBox = (allergen) => {
