@@ -4,17 +4,18 @@ class FoodJournal extends React.Component {
 
     state = {
         allergens: [],
-        mealName:'',
-        mealSize:5,
-        mealSpeed:5,
-        mealCals:0,
+        name:'',
+        quantity:5,
+        speed:5,
+        calories:0,
         symptomName:'',
         symptomSummary:'',
         symptomLength:"",
         symptomSeverity:"",
         coffee:0,
         alcohol:0,
-        daySummary:''
+        daySummary:'',
+        the_date:''
     }
 
     API = 'http://localhost:3000/api/v1/'
@@ -28,6 +29,10 @@ class FoodJournal extends React.Component {
         })
         const today = new Date().toDateString().split(' ')
         this.setState({ the_date: (today[0] + ', ' + today[2] + ' ' + today[1] + ' ' + today[3]) })
+        fetch(`${this.API}food_days`)
+        .then(resp => resp.json())
+        .then(data => console.log(data)
+        )
     }
 
     addBoxValues() {
@@ -41,23 +46,46 @@ class FoodJournal extends React.Component {
         if (e.target.type === 'checkbox')  {
             this.setState({[e.target.id]: e.target.checked })
         } else {
-        this.setState({ [e.target.name]: e.target.value })
+            this.setState({ [e.target.name]: e.target.value })
         }
     }
 
     onSubmit = (e) => {
         e.preventDefault()
-        // console.log(e.target)
-        if (e.target.name === 'meal') {
+        console.log(e.target.id)
+        if (e.target.id === 'meal') {
+            console.log('im not gay')
             const theAllergens = this.state.allergens.map(allergen => allergen.name);
-            const stateForms = ['mealName','mealSize','mealSpeed','mealCals'];
+            const stateForms = ['name','quantity','speed','calories','the_date'];
             const allOfEm = theAllergens.concat(stateForms);
-            const derState = Object.keys(this.state)
-            const nonApp = derState.filter(oneThing => !allOfEm.includes(oneThing))
-            console.log(nonApp)
-            // console.log(daState.filter(oneThing => allOfEm.includes(oneThing)))
-            // const myMeal = {}
-            }
+            // finds all the allergens in my state and saves as object
+            let listOfMealAllergens = {};
+            this.state.allergens.map(allergen => {
+                console.log('hello buddy', allergen.name)
+                listOfMealAllergens[allergen.name] = this.state[allergen.name]
+            })
+            console.log(listOfMealAllergens)
+            // const derState = Object.keys(this.state)
+            // const nonApp = derState.filter(oneThing => !allOfEm.includes(oneThing))
+            let mealEntry = {};
+            stateForms.map(oneThing => {
+                console.log(oneThing, this.state[oneThing])
+                mealEntry[oneThing] = this.state[oneThing]
+                }
+            )
+            fetch('http://localhost:3000/api/v1/meals', {
+                method: "POST",
+                 headers: {
+                   "Content-Type": "application/json",
+                   "Accept": "application/json"
+                 },
+                 body: JSON.stringify({meal: mealEntry})
+               })
+                 .then(res => res.json())
+                 .then(newDay => console.log(mealEntry) )
+               alert('Thank you for submitting your data!')
+            //    this.resetMyState();
+        }
     }
 
 render() {
@@ -85,28 +113,28 @@ const addAllergens = () => {
          return this.state.allergens.map(allergen => allergenBox(allergen) )
             }
     }
-const addInput = (name, type, params) => {
+const addInput = (formName, type, params) => {
     // adds an input to form, using dynamic ability to creat text or number fields
     if (type === 'number') {
         if (params === 'oneTen') {
-            return <span> <input name={name} id ={name} type={type} value={this.state.type} onChange={this.handleOnChange} min='0' max='10' required/> </span>
+            return <span> <input name={formName} id ={formName} type={type} value={this.state.type} onChange={this.handleOnChange} min='0' max='10' required/> </span>
         } else {
-            return <span> <input name={name} id ={name} type={type} value={this.state.type} onChange={this.handleOnChange} min='0' required/> </span>
+            return <span> <input name={formName} id ={formName} type={type} value={this.state.type} onChange={this.handleOnChange} min='0' required/> </span>
         }
     } else {
-    return <span> <input name={name} id ={name} type={type} value={this.state.type} onChange={this.handleOnChange} required/> </span>
+    return <span> <input name={formName} id ={formName} type={type} value={this.state.type} onChange={this.handleOnChange} required/> </span>
     }
 }
     return (
         <div className='eachPage'>
         Today is {this.state.the_date}.<br/>
-        <form className='selectorForm' name='meal' onSubmit={this.onSubmit}>
+        <form className='selectorForm' name='meal' id='meal' onSubmit={this.onSubmit}>
         M E A L - = - F O R M<br/>
         Thing to select previous meal types, hehe<br/>
-        What did you eat?{addInput('mealName','text')}<br/>
-        How big a meal was it?(1 to 10){addInput('mealSize','number','oneTen')}<br/>
-        How fast did you shovel it down?(1 to 10){addInput('mealSpeed','number','oneTen')}<br/>
-        How many calories did it have?{addInput('mealCals','number')}<br/>
+        What did you eat?{addInput('name','text')}<br/>
+        How big a meal was it?(1 to 10){addInput('quantity','number','oneTen')}<br/>
+        How fast did you shovel it down?(1 to 10){addInput('speed','number','oneTen')}<br/>
+        How many calories did it have?{addInput('calories','number')}<br/>
         What kind of allergens did it have?<br/>
         {addAllergens()}
         <input type='submit' value='push me'/>
