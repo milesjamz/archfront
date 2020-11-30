@@ -56,7 +56,7 @@ class FoodJournal extends React.Component {
             const nonApp = derState.filter(oneThing => !allOfEm.includes(oneThing))
             console.log(nonApp)
             // console.log(daState.filter(oneThing => allOfEm.includes(oneThing)))
-            const myMeal = {}
+            // const myMeal = {}
             }
     }
 
@@ -126,8 +126,8 @@ const addInput = (name, type, params) => {
         Care to summarize your day overall?<br/>
         {addInput('symptomName','text')}<br/>
         </form>
-        <button onClick={() => alert('a nice lil pick me up, eh')}>☕a cup of joe☕</button><br/>
-        <button onClick={() => alert('feelin tipsy')}>🍺a drink🍺</button><br/><br/> 
+        <button onClick={() => alert('a nice lil pick me up, eh')}><span role='img' aria-label='Coffee Cup'>☕</span>a cup of joe<span role='img' aria-label='Coffee Cup'>☕</span></button><br/>
+        <button onClick={() => alert('feelin tipsy')}><span role='img' aria-label='Coffee Cup'>🍺</span>a drink<span role='img' aria-label='Coffee Cup'>🍺 </span></button><br/><br/> 
         </div>
             )
     }
