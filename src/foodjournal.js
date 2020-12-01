@@ -16,6 +16,7 @@ class FoodJournal extends React.Component {
         alcohol:'Beer',
         daySummary:'',
         the_date:'',
+        food_day:'',
         food_day_id:'',
         aQuantity:'',
         cQuantity:''
@@ -40,7 +41,8 @@ class FoodJournal extends React.Component {
         .then(resp => resp.json())
         .then(data => {
             console.log(data)
-            this.setState({food_day_id: data[0].id})
+            this.setState({food_day:data[0],
+                            food_day_id: data[0].id})
             })
         const myFoodDay = {
             the_date:properDate,
@@ -140,6 +142,15 @@ class FoodJournal extends React.Component {
     }
 
 render() {
+const todayData = this.state.food_day
+if(todayData.meals) {
+    console.log(todayData.meals.length, todayData.drinks)
+console.log(todayData.meals.length > 0 ? 'hm' : 'fuck')
+var dayMeals = todayData.meals.length
+// const reducer = (accumulator, currentValue) => accumulator + currentValue
+var dayDrinks = todayData.drinks.reduce((sum, oneDay) => sum + oneDay.quantity, 0)
+console.log(dayDrinks)
+}
 const allergenBox = (allergen) => {
     // adds allergen checkboxes dynamically
     // const myName = allergen.name
@@ -216,7 +227,7 @@ const addInput = (formName, type, params) => {
         </form>
         <form className='selectorForm' name='summary' onSubmit={this.onSubmit}>
         D A Y - = - S U M M A R Y<br/>
-        {this.props.user.username}, you've currently reported X meals, Y symptoms, Z coffees and A drinks.<br/>
+        {this.props.user.username}, you've currently reported {dayMeals ? dayMeals : 'loading'} meal(s), Y symptoms, and {dayDrinks ? dayDrinks : 'loading'} drinks.<br/>
         Care to summarize your day overall?<br/>
         {addInput('symptomName','text')}<br/>
         </form>
