@@ -128,6 +128,7 @@ class FoodJournal extends React.Component {
                 quantity: parseInt(this.state[tityType], 10)
             }
             console.log(newDrink)
+            console.log('is this thing on??')
             fetch(`http://localhost:3000/api/v1/drinks`, {
                 method: "POST",
                  headers: {
@@ -147,7 +148,6 @@ if(todayData.meals) {
     console.log(todayData.meals.length, todayData.drinks)
 console.log(todayData.meals.length > 0 ? 'hm' : 'fuck')
 var dayMeals = todayData.meals.length
-// const reducer = (accumulator, currentValue) => accumulator + currentValue
 var dayDrinks = todayData.drinks.reduce((sum, oneDay) => sum + oneDay.quantity, 0)
 console.log(dayDrinks)
 }

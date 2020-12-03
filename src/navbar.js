@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Navbar(props) {
@@ -7,7 +7,7 @@ const toggler = (boolean) => {
 if (boolean === false) {
   return <span> <Link to='/login'>Log In</Link></span>
 } else {
-  return <span> <Link to='/userchart'>calendar</Link> || <Link to='/entry'>daily entry</Link> || <Link to='/foodjournal'>food journal</Link> || food day calendar ||<button onClick={props.logOut} > log out </button> || {props.user ? props.user.username : null } </span>
+  return <span> <Link to='/userchart'>calendar</Link> || <Link to='/entry'>daily entry</Link> || <Link to='/foodjournal'>food journal</Link> || food day calendar ||<button onClick={props.logOut} > log out </button> || {props.user ? props.user.username : null} </span>
  }
 }
 
