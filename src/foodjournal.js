@@ -84,7 +84,7 @@ class FoodJournal extends React.Component {
         e.preventDefault()
         console.log(e.target.id, e.target)
         if (e.target.id === 'meal') {
-            console.log('im not mad at ya')
+            // console.log('im not mad at ya')
             const theAllergens = this.state.allergens.map(allergen => allergen.name);
             const stateForms = ['name','quantity','speed','calories','food_day_id'];
             const allOfEm = theAllergens.concat(stateForms);
@@ -140,7 +140,27 @@ class FoodJournal extends React.Component {
                  .then(res => res.json())
                  .then(parsedResp => console.log(parsedResp) )
         }
-    }
+        else if (e.target.name === 'symptoms') {
+            const newSymptom = {
+                name: this.state.symptomName,
+                summary: this.state.symptomSummary,
+                length: this.state.symptomLength,
+                severity: this.state.symptomSeverity,
+                food_day_id:this.state.food_day_id
+            }
+            console.log('i am a big dude who loves a good dose o symptoms')
+            fetch(`http://localhost:3000/api/v1/symptoms`, {
+                method: "POST",
+                 headers: {
+                   "Content-Type": "application/json",
+                   "Accept": "application/json"
+                 },
+                 body: JSON.stringify({symptom: newSymptom})
+               })
+                 .then(res => res.json())
+                 .then(parsedResp => console.log(parsedResp) )
+            }
+        }
 
 render() {
 const todayData = this.state.food_day
@@ -149,7 +169,8 @@ if(todayData.meals) {
 console.log(todayData.meals.length > 0 ? 'hm' : 'fuck')
 var dayMeals = todayData.meals.length
 var dayDrinks = todayData.drinks.reduce((sum, oneDay) => sum + oneDay.quantity, 0)
-console.log(dayDrinks)
+var daySymptoms = todayData.symptoms
+console.log(todayData, daySymptoms)
 }
 const allergenBox = (allergen) => {
     // adds allergen checkboxes dynamically
@@ -227,7 +248,7 @@ const addInput = (formName, type, params) => {
         </form>
         <form className='selectorForm' name='summary' onSubmit={this.onSubmit}>
         D A Y - = - S U M M A R Y<br/>
-        {this.props.user.username}, you've currently reported {dayMeals ? dayMeals : 'loading'} meal(s), Y symptoms, and {dayDrinks ? dayDrinks : 'loading'} drinks.<br/>
+        {this.props.user.username}, you've currently reported {dayMeals ? dayMeals : 'loading'} meal(s), {daySymptoms ? daySymptoms.length : 'loading'} symptoms, and {dayDrinks ? dayDrinks : 'loading'} drinks.<br/>
         Care to summarize your day overall?<br/>
         {addInput('symptomName','text')}<br/>
         </form>
