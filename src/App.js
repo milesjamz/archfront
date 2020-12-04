@@ -7,12 +7,14 @@ import Chart from './chart'
 import Landing from './landing'
 import Login from './login'
 import FoodJournal from './foodjournal'
+import FoodDayChart from './fooddaychart'
 
 class App extends React.Component {
   
   state = {
     loggedIn:true,
-    currentUser:''
+    currentUser:'',
+    days:[]
   }
 
   logOut = () => {
@@ -24,6 +26,11 @@ class App extends React.Component {
     .then(resp => resp.json())
     .then(user => {
       this.setState({currentUser: user})
+    })
+    fetch('http://localhost:3000/api/v1/food_days')
+    .then(resp => resp.json())
+    .then(days => {
+      this.setState({days:days})
     })
   }
   
@@ -47,6 +54,9 @@ class App extends React.Component {
       </Route>
       <Route path='/foodjournal'>
         <FoodJournal user={this.state.currentUser} />
+      </Route>
+      <Route path='/fooddaychart'>
+        <FoodDayChart user={this.state.currentUser} days={this.state.days} />
       </Route>
     </Switch>
 </div>
