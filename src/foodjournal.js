@@ -40,7 +40,7 @@ class FoodJournal extends React.Component {
         fetch(`${this.API}food_days`)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             this.setState({food_day:data[0],
                             food_day_id: data[0].id})
             })
@@ -72,7 +72,7 @@ class FoodJournal extends React.Component {
 
     handleOnChange = (e) => {
         // console.log(e.target.id, e.target.value, e.target.type, e.target.name)
-        console.log(e.target)
+        // console.log(e.target)
         if (e.target.type === 'checkbox')  {
             this.setState({[e.target.id]: e.target.checked })
         } else {
@@ -80,9 +80,36 @@ class FoodJournal extends React.Component {
         }
     }
 
+
+
     onSubmit = (e) => {
         e.preventDefault()
         console.log(e.target.id, e.target)
+
+        const makeAllergens = (mealId, allergenArray) => {
+            // console.log('the input is ' + input)
+            if (allergenArray) {
+            allergenArray.forEach(oneAllergen => {
+            const newMealAllergen = {
+                meal_id:mealId,
+                allergen_id:oneAllergen
+            }
+            console.log('trying to post',newMealAllergen)
+            fetch('http://localhost:3000/api/v1/meal_allergens', {
+                method: "POST",
+                 headers: {
+                   "Content-Type": "application/json",
+                   "Accept": "application/json"
+                 },
+                 body: JSON.stringify({meal_allergen: newMealAllergen})
+               })
+                 .then(res => res.json())
+                 .then(newMealAllergenEntry => console.log(newMealAllergenEntry))
+            })
+       } else {
+           console.log('no allergens to add')
+       }
+    }
         if (e.target.id === 'meal') {
             // console.log('im not mad at ya')
             const theAllergens = this.state.allergens.map(allergen => allergen.name);
@@ -91,16 +118,14 @@ class FoodJournal extends React.Component {
             // finds all the dynamic allergens in my state and saves as object
             let listOfMealAllergens = {};
             this.state.allergens.map(allergen => {
-                console.log('hello buddy', allergen.name)
-                listOfMealAllergens[allergen.name] = this.state[allergen.name]
+                // console.log('hello buddy', allergen.name)
+                listOfMealAllergens[allergen.id] = this.state[allergen.name]
             })
-            const mealAllergenz = []
+            let mealAllergenz = []
             for (const allergenz in listOfMealAllergens) {
                 listOfMealAllergens[allergenz] === true ? mealAllergenz.push(allergenz) : console.log(`${allergenz} was false`)
             }
             console.log(listOfMealAllergens, mealAllergenz)
-            // const derState = Object.keys(this.state)
-            // const nonApp = derState.filter(oneThing => !allOfEm.includes(oneThing))
             let mealEntry = {};
             stateForms.map(oneThing => {
                 console.log(oneThing, this.state[oneThing])
@@ -116,8 +141,10 @@ class FoodJournal extends React.Component {
                  body: JSON.stringify({meal: mealEntry})
                })
                  .then(res => res.json())
-                 .then(newDay => console.log(mealEntry) )
-               alert('Thank you for submitting your data!')
+                 .then(mealEntry => {
+                    mealEntry.id ? makeAllergens(mealEntry.id, mealAllergenz) : console.log('got an issue to solve')
+                    })
+            //    alert('Thank you for submitting your data!')
             //    this.resetMyState();
         } else if(e.target.name === 'caffiene' || e.target.name === 'alcohol') {
             console.log('its woikin', e.target)
@@ -148,7 +175,6 @@ class FoodJournal extends React.Component {
                 severity: this.state.symptomSeverity,
                 food_day_id:this.state.food_day_id
             }
-            console.log('i am a big dude who loves a good dose o symptoms')
             fetch(`http://localhost:3000/api/v1/symptoms`, {
                 method: "POST",
                  headers: {
@@ -165,12 +191,12 @@ class FoodJournal extends React.Component {
 render() {
 const todayData = this.state.food_day
 if(todayData.meals) {
-    console.log(todayData.meals.length, todayData.drinks)
-console.log(todayData.meals.length > 0 ? 'hm' : 'fuck')
+    console.log(todayData)
+// console.log(todayData.meals.length > 0 ? 'hm' : 'fuck')
 var dayMeals = todayData.meals.length
 var dayDrinks = todayData.drinks.reduce((sum, oneDay) => sum + oneDay.quantity, 0)
 var daySymptoms = todayData.symptoms
-console.log(todayData, daySymptoms)
+// console.log(todayData, daySymptoms)
 }
 const allergenBox = (allergen) => {
     // adds allergen checkboxes dynamically
