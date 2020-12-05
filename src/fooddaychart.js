@@ -9,8 +9,8 @@ class FoodDayChart extends React.Component {
 
     handleOnChange = (e) => {
         // console.log(e.target.value)
-        let myDay = this.props.days.find(day => day.id == e.target.value)
-        // console.log(this.props.days[0].id, e.target.value, myDay)
+        let myDay = this.props.days.find(day => day.id === parseInt(e.target.value, 10))
+        console.log(myDay)
         this.setState({today:myDay, dropdown:e.target.value})
     }
 
@@ -25,16 +25,15 @@ class FoodDayChart extends React.Component {
                     })}
                 </select>
                 <h1>these were the days of my foood</h1>
-                <p>
-                    Date:{this.state.today ? this.state.today.the_date : 'loading'}<br/>
+                    {this.state.today.the_date ? `Date: ${this.state.today.the_date}` : null }<br/>
                     <ul>
-                <li />Meals:{this.state.today.meals ? this.state.today.meals.length : null}<br/>
-                { this.state.today.meals ? this.state.today.meals.map(meal => <li key={meal.id}>{meal.name}</li>) : null }
-                <li />Drinks:{this.state.today.drinks ? this.state.today.drinks.length : null}
-                { this.state.today.drinks ? this.state.today.drinks.map(drink => <li key={drink.id}>{drink.quantity} {drink.drink_type}s</li>) : null }
-                <li />Symptoms:{this.state.today.symptoms ? this.state.today.symptoms.length : null}
+                <li />{this.state.today.meals ? `Meals: ${this.state.today.meals.length}` : null}<br/><br/>
+                { this.state.today.meals ? this.state.today.meals.map(meal => <li key={meal.id}>{meal.name} - {meal.calories} calories</li>) : null }<br/>
+                <li />{this.state.today.drinks ? `Drinks: ${this.state.today.drinks.reduce((sum, oneDay) => sum + oneDay.quantity, 0)}` : null}<br/>
+                { this.state.today.drinks ? this.state.today.drinks.map(drink => <li key={drink.id}> {drink.quantity} {drink.drink_type}s</li>) : null }<br/>
+                <li />{this.state.today.symptoms ? `Symptoms: ${this.state.today.symptoms.length}` : null}
+                { this.state.today.symptoms ? this.state.today.symptoms.map(symptom => <li key={symptom.id}> {symptom.name} - {symptom.length} minutes long - {symptom.severity} out of 10 severity </li>) : null}
                 </ul>
-                </p>
             </div>
         )
     }
